@@ -1,4 +1,4 @@
-# VPC for Cluster
+# VPC for Cluster for eks
 data "aws_availability_zones" "azs" {}
 
 module "vpc" {
