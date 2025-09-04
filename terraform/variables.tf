@@ -28,6 +28,6 @@ variable "public_subnet_cidr_blocks" {
 
 variable "tags" {
   default = {
-    App = "eks-cluster1"
+    App = "eks-cluster"
   }
 }
