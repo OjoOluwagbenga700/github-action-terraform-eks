@@ -12,10 +12,11 @@ on:
 
 # Environment Variables
 env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   S3_BUCKET: ${{ vars.S3_BUCKET }}
   AWS_REGION: ${{ vars.AWS_REGION }}
   EKS_CLUSTER: ${{ vars.EKS_CLUSTER }}
-  AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
 
 # Define Jobs
 jobs:
@@ -24,9 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     # Run only on push events
     if: github.event_name == 'push'
-    permissions:
-      id-token: write
-      contents: read  
 
     defaults:
       run:
@@ -40,7 +38,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
@@ -81,9 +80,6 @@ jobs:
     runs-on: ubuntu-latest
     # Only trigger for workflow_dispatch
     if: github.event_name == 'workflow_dispatch'
-    permissions:
-      id-token: write
-      contents: read
 
     defaults:
       run:
@@ -97,7 +93,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
