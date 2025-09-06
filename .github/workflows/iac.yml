@@ -104,9 +104,9 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$S3_BUCKET"
 
-      - name: Get Kubernetes config
-        id: getconfig
-        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }} 
+     # - name: Get Kubernetes config
+       # id: getconfig
+       #run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }} 
 
       #- name: Delete Ingress controller
        # run: kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/aws/deploy.yaml
