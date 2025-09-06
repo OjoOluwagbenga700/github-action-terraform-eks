@@ -13,3 +13,4 @@ module "ecr" {
     Terraform = "true"
   }
 }
+# Output ECR Repository URL
