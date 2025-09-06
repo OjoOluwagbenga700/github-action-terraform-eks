@@ -3,12 +3,12 @@ name: "infra-deploy"
 
 # Workflow Triggers
 on:
-  push:
-    branches:
-      - main
+  #push:
+    #branches:
+     # - main
     paths:
       - terraform/**
-  workflow_dispatch: # Enables manual trigger for destroy job
+ #workflow_dispatch: # Enables manual trigger for destroy job
 
 # Environment Variables
 env:
@@ -108,8 +108,8 @@ jobs:
         id: getconfig
         run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }} 
 
-      - name: Delete Ingress controller
-        run: kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/aws/deploy.yaml
+      #- name: Delete Ingress controller
+       # run: kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/aws/deploy.yaml
 
       - name: Empty ECR Repository
         run: |
