@@ -111,16 +111,16 @@ jobs:
       #- name: Delete Ingress controller
        # run: kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/aws/deploy.yaml
 
-      - name: Empty ECR Repository
-        run: |
-          REPOSITORY_NAME=${{ vars.ECR_REPO }}
-          IMAGES=$(aws ecr list-images --repository-name $REPOSITORY_NAME --query 'imageIds[*]' --output json)
-          if [[ "$IMAGES" != "[]" ]]; then
-            echo "Deleting images from $REPOSITORY_NAME..."
-            aws ecr batch-delete-image --repository-name $REPOSITORY_NAME --image-ids "$IMAGES"
-          else
-            echo "No images found in $REPOSITORY_NAME."
-          fi
+      #- name: Empty ECR Repository
+        #run: |
+          #REPOSITORY_NAME=${{ vars.ECR_REPO }}
+         #IMAGES=$(aws ecr list-images --repository-name $REPOSITORY_NAME --query 'imageIds[*]' --output json)
+         # if [[ "$IMAGES" != "[]" ]]; then
+          #  echo "Deleting images from $REPOSITORY_NAME..."
+           # aws ecr batch-delete-image --repository-name $REPOSITORY_NAME --image-ids "$IMAGES"
+          #else
+            #echo "No images found in $REPOSITORY_NAME."
+          #fi
       
       - name: Terraform destroy
         id: destroy
