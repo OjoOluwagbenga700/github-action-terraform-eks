@@ -26,3 +26,5 @@ module "vpc" {
 
   tags = var.tags
 }
+
+# Output VPC ID
